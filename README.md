@@ -10,3 +10,12 @@
 4. `npm i`
 5. `node index.js`
 6. Profit!!!
+
+# for older versions:
+
+1. open up terminal
+2. `git clone https://github.com/respecting/shit-yuzu-ea-updater-for-linux.git`
+3. `cd shit-yuzu-ea-updater-for-linux`
+4. `npm i`
+5. `node old.js`
+6. Profit!!!

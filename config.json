@@ -1,0 +1,6 @@
+{
+    "version": "latest",
+    "example_version": "EA-1269",
+    "_message": "please make sure that the build exists in this list: https://pineappleea.github.io/ and the build is higher than 1266",
+    "_message2": "or it will error out. ty"
+}

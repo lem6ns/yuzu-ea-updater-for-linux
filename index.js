@@ -3,6 +3,7 @@ const fetch = require("node-fetch"),
     ora = require("ora"),
     apps = require("os").homedir() + "/.apps/",
     shell = require("shelljs"),
+    config = require("./config.json"),
     { spawn } = require('child_process'),
     fs = require("fs");
 
@@ -12,12 +13,15 @@ if (require("os").platform() != "linux") {
     return process.exit(1);
 };
 
-let spinner = ora("Fetching latest release from pineappleEA/pineapple-src...");
+let spinner = ora(`Fetching the ${config.version} release from pineappleEA/pineapple-src...`),
+url = "https://api.github.com/repos/pineappleEA/pineapple-src/releases/";
 
-fetch("https://api.github.com/repos/pineappleEA/pineapple-src/releases/latest").then(r => r.json()).then(json => {
+if (config.version.startsWith("EA-")) url = url+"tags/";
+
+fetch(url+config.version).then(r => r.json()).then(json => {
     const asset = json.assets.filter(asset => asset.name.endsWith("AppImage"))[0];
     if (!asset) {
-        spinner.fail("The Linux build is currently being bundled as an AppImage. Please try again later.");
+        spinner.fail("This build doesn't have an AppImage. If this is the latest release, try again later. If this is an older one, get a different build.");
         return process.exit(1);
     }
     
@@ -35,7 +39,7 @@ fetch("https://api.github.com/repos/pineappleEA/pineapple-src/releases/latest").
     if (fs.existsSync(release)) {
         const releaseJSON = JSON.parse(fs.readFileSync(release));
         if (releaseJSON.tag_name == json.tag_name) {
-            spinner.succeed("You already have the latest release. Launching Yuzu...");
+            spinner.succeed(`You already have the ${config.version} release. Launching Yuzu...`);
             spawn(`${yuzuFolder}yuzu.AppImage`, {
                 stdio: 'ignore',
                 detached: true
@@ -45,8 +49,8 @@ fetch("https://api.github.com/repos/pineappleEA/pineapple-src/releases/latest").
     }
 
     fs.writeFileSync(release, JSON.stringify(json));
-    spinner.succeed(`Fetched latest release. This is build ${json.tag_name}.`);
-    spinner = ora("Downloading the latest Yuzu AppImage...");
+    spinner.succeed(`Fetched the release. This is build ${json.tag_name}.`);
+    spinner = ora(`Downloading the ${config.version} Yuzu AppImage...`);
 
     const file = fs.createWriteStream(yuzuFolder + "yuzu.AppImage");
     
@@ -58,13 +62,15 @@ fetch("https://api.github.com/repos/pineappleEA/pineapple-src/releases/latest").
     fetch(asset.browser_download_url).then(r => {
         r.body.pipe(file);
         file.on("finish", () => {
-            spinner.succeed(`Finished downloading latest release! It is stored at "${yuzuFolder}yuzu.AppImage". Launching Yuzu...`);
+            spinner.succeed(`Finished downloading the ${config.version} release! It is stored at "${yuzuFolder}yuzu.AppImage". Launching Yuzu...`);
             shell.exec(`chmod a+x ${yuzuFolder}yuzu.AppImage`, () => {
-                spawn(`${yuzuFolder}yuzu.AppImage`, {
-                    stdio: 'ignore',
-                    detached: true
-                }).unref();
-                process.exit();
+                setTimeout(()=>{
+                    spawn(`${yuzuFolder}yuzu.AppImage`, {
+                        stdio: 'ignore',
+                        detached: true
+                    }).unref();
+                    process.exit();
+                },1000)
             });
         });
     });
