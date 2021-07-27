@@ -1,0 +1,27 @@
+{
+  "name": "shit-yuzu-ea-updater",
+  "version": "1.0.0",
+  "description": "lololol this is gonna be horrible!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/respecting/shit-yuzu-ea-updater.git"
+  },
+  "keywords": [
+    "yuzu"
+  ],
+  "author": "respecting",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/respecting/shit-yuzu-ea-updater/issues"
+  },
+  "homepage": "https://github.com/respecting/shit-yuzu-ea-updater#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "ora": "^5.4.1",
+    "shelljs": "^0.8.4"
+  }
+}
