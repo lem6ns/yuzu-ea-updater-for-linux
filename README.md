@@ -6,8 +6,8 @@
 # Usage
 
 1. open up terminal
-2. `git clone https://github.com/respecting/shit-yuzu-ea-updater-for-linux.git`
-3. `cd shit-yuzu-ea-updater-for-linux`
+2. `git clone https://github.com/respecting/yuzu-ea-updater-for-linux.git`
+3. `cd yuzu-ea-updater-for-linux`
 4. `npm i`
 5. `node index.js`
 6. Profit!!!
