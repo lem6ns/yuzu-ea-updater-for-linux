@@ -70,7 +70,7 @@ fetch(url+config.version).then(r => r.json()).then(json => {
                         detached: true
                     }).unref();
                     process.exit();
-                },1000)
+                },250)
             });
         });
     });
