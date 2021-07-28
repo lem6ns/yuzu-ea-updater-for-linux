@@ -21,6 +21,7 @@
   "homepage": "https://github.com/respecting/shit-yuzu-ea-updater#readme",
   "dependencies": {
     "node-fetch": "^2.6.1",
+    "node-fetch-progress": "^1.0.2",
     "ora": "^5.4.1",
     "shelljs": "^0.8.4"
   }
