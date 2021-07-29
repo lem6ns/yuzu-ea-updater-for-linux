@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;">
+	<meta http-equiv="X-Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;">
+	<link rel="stylesheet" href="css/index.css" />
+	<title>yuzu Early Access Installer </title>
+</head>
+
+<body>
+    <div class="has-padding">
+        <img src="img/yuzu.png" id="applicationIcon" alt="Application icon" />
+        <br />
+        <br />
+        <h2 class="subtitle">
+            Welcome to the yuzu Early Access installer!
+        </h2>
+        <h2 class="subtitle">
+            We will have you up and running in just a few moments.
+        </h2>
+    </div>
+
+    <div class="buttons">
+        <div class="center">
+            <button id="install">Install</button>
+        </div>
+        <div class="center">
+            <button id="settings">Settings</button>
+        </div>
+    </div>
+
+    <div class="progress">
+        <h1>Installing...</h1>
+        <p>
+            Reminder: yuzu Early Access is an <strong>experimental</strong> emulator. Stuff will break!
+        </p>
+
+        <p>Downloading yuzu Early Access (<span id="downloaded">0 MB</span> of <span id="total">0 MB</span>)...</p>
+        <div id="progressbar">
+            <div id="progress"></div>
+        </div>
+    </div>
+
+    <div class="finish" style="display: block;">
+        <h1>Thanks for installing yuzu Early Access!</h1>
+        <p>
+            You can find your installed applications on your desktop.
+        </p>
+        <br>
+        <img src="./img/shortcut.png">
+        <button id="exit">Exit</button>
+    </div>
+
+    <div class="settings">
+        <h1>Settings</h1>
+        <label>Choose a release:</label>
+        <select id="releases">
+        <!-- Releases will be added by renderer.js -->
+        </select>
+        <br>
+        <br>
+        <label>Where do you want to save yuzu?</label>
+        <button type="file" id="folder">Choose Folder</button>
+        <br>
+        <br>
+        <label id="lol">Current Folder: </label> <button type="file" id="default">Reset to Default</button>
+
+        <button id="save" class="center">Save</button>
+    </div>
+
+	<script src="js/renderer.js"></script>
+</body>
+</html>
