@@ -1,14 +1,17 @@
 {
-  "name": "shit-yuzu-ea-updater",
+  "name": "yuzu-ea-updater",
   "version": "1.0.0",
   "description": "lololol this is gonna be horrible!!",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron-forge start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/respecting/shit-yuzu-ea-updater.git"
+    "url": "git+https://github.com/respecting/yuzu-ea-updater.git"
   },
   "keywords": [
     "yuzu"
@@ -16,13 +19,51 @@
   "author": "respecting",
   "license": "WTFPL",
   "bugs": {
-    "url": "https://github.com/respecting/shit-yuzu-ea-updater/issues"
+    "url": "https://github.com/respecting/yuzu-ea-updater/issues"
   },
-  "homepage": "https://github.com/respecting/shit-yuzu-ea-updater#readme",
+  "homepage": "https://github.com/respecting/yuzu-ea-updater#readme",
   "dependencies": {
+    "create-desktop-shortcuts": "^1.5.0",
+    "electron-dl": "^3.2.1",
+    "electron-settings": "^4.0.2",
+    "electron-squirrel-startup": "^1.0.0",
     "node-fetch": "^2.6.1",
-    "node-fetch-progress": "^1.0.2",
-    "ora": "^5.4.1",
     "shelljs": "^0.8.4"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.59",
+    "@electron-forge/maker-deb": "^6.0.0-beta.59",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.59",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.59",
+    "@electron-forge/maker-zip": "^6.0.0-beta.59",
+    "electron": "^13.1.7",
+    "electron-forge-maker-appimage": "github:Marcus10110/electron-forge-maker-appimage"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "yuzu_ea_updater"
+          }
+        },
+        {
+          "name": "electron-forge-maker-appimage",
+          "platforms": [
+            "linux"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
