@@ -15,8 +15,9 @@ const {
     homeFolder = require("os").homedir(),
     {resolve} = require("path"),
     createDesktopShortcut = require('create-desktop-shortcuts'),
+    { exec } = require('child_process'),
     fs = require("fs");
-app.commandLine.appendSwitch('disable-pinch');
+    app.commandLine.appendSwitch('disable-pinch');
 // actual code
 
 async function releases() {
@@ -67,6 +68,7 @@ function createWindow() {
                 event.reply("percent", p)
             }
         }).then(dl => {
+            exec(`chmod +x ${dl.getSavePath()}`)
             let desktopShortcut = createDesktopShortcut({
                 linux: { 
                     icon: resolve("./public/img/ea.png"),
@@ -89,7 +91,7 @@ function createWindow() {
                 }
             })
             
-            if (desktopShortcut && shortcut) event.reply("finished", dl.getSavePath())
+            if (desktopShortcut && shortcut) event.reply("finished", dl.getSavePath());
         });
     });
 
