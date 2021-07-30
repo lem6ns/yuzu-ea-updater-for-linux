@@ -6,7 +6,7 @@
  Please do <strong>NOT LOOK AT THE CODE!!!</strong> It is very horrible but it works.
 
 # Download
-[Here.](https://github.com/respecting/yuzu-ea-updater-for-linux/releases/tag/1.0.0)
+[Here.](https://github.com/respecting/yuzu-ea-updater-for-linux/releases/latest)
 
 # Screenshots
 ![home](https://i.imgur.com/vr1XrjH.png)
