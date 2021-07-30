@@ -1,6 +1,6 @@
 {
   "name": "yuzu-ea-updater",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "lololol this is gonna be horrible!!",
   "main": "main.js",
   "scripts": {
@@ -32,12 +32,9 @@
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.59",
-    "@electron-forge/maker-deb": "^6.0.0-beta.59",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.59",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.59",
-    "@electron-forge/maker-zip": "^6.0.0-beta.59",
     "electron": "^13.1.7",
-    "electron-forge-maker-appimage": "github:Marcus10110/electron-forge-maker-appimage"
+    "electron-forge-maker-appimage": "github:SpacingBat3/electron-forge-maker-appimage"
   },
   "config": {
     "forge": {
@@ -51,17 +48,17 @@
         },
         {
           "name": "electron-forge-maker-appimage",
+          "config": {
+            "options": {
+              "icon": "public/img/ea.png",
+              "genericName": "Switch Emulator",
+              "categories": ["Games"],
+              "compression": "gzip"
+            }
+          },
           "platforms": [
             "linux"
           ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
         }
       ]
     }

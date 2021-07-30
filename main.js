@@ -37,7 +37,7 @@ async function releases() {
 
 function createWindow() {
     const win = new BrowserWindow({
-        icon: "./public/img/ea.png",
+        icon: __dirname + "/public/img/ea.png",
         width: 1280,
         height: 480,
         webPreferences: {
@@ -78,29 +78,31 @@ function createWindow() {
             }
         }).then(dl => {
             exec(`chmod +x ${dl.getSavePath()}`)
-            let desktopShortcut = createDesktopShortcut({
-                linux: { 
-                    icon: resolve("./public/img/ea.png"),
-                    type: 'Application',
-                    terminal: false,
-                    chmod: true,
-                    name: 'yuzu Early Access',
-                    filePath: args.save+"yuzu.AppImage" 
-                }
-            }),
-            shortcut = createDesktopShortcut({
-                linux: { 
-                    outputPath: homeFolder + "/.local/share/applications/",
-                    icon: resolve("./public/img/ea.png"),
-                    type: 'Application',
-                    terminal: false,
-                    chmod: true,
-                    name: 'yuzu Early Access',
-                    filePath: args.save+"yuzu.AppImage" 
-                }
+            exec(`cp ${__dirname}/public/img/ea.png ${args.save}/ea.png`, ()=>{
+                let desktopShortcut = createDesktopShortcut({
+                    linux: { 
+                        icon: args.save+"ea.png",
+                        type: 'Application',
+                        terminal: false,
+                        chmod: true,
+                        name: 'yuzu Early Access',
+                        filePath: args.save+"yuzu.AppImage" 
+                    }
+                }),
+                shortcut = createDesktopShortcut({
+                    linux: { 
+                        outputPath: homeFolder + "/.local/share/applications/",
+                        icon: args.save+"ea.png",
+                        type: 'Application',
+                        terminal: false,
+                        chmod: true,
+                        name: 'yuzu Early Access',
+                        filePath: args.save+"yuzu.AppImage" 
+                    }
+                })
+                
+                if (desktopShortcut && shortcut) event.reply("finished", dl.getSavePath());
             })
-            
-            if (desktopShortcut && shortcut) event.reply("finished", dl.getSavePath());
         });
     });
 
