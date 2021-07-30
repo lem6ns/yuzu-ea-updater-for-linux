@@ -38,13 +38,13 @@
             Reminder: yuzu Early Access is an <strong>experimental</strong> emulator. Stuff will break!
         </p>
 
-        <p>Downloading yuzu Early Access (<span id="downloaded">0 MB</span> of <span id="total">0 MB</span>)...</p>
+        <p>Downloading <span id="dlMessage"></span> (<span id="downloaded">0 MB</span> of <span id="total">0 MB</span>)...</p>
         <div id="progressbar">
             <div id="progress"></div>
         </div>
     </div>
 
-    <div class="finish" style="display: block;">
+    <div class="finish">
         <h1>Thanks for installing yuzu Early Access!</h1>
         <p>
             You can find your installed applications on your desktop.
@@ -62,11 +62,14 @@
         </select>
         <br>
         <br>
-        <label>Where do you want to save yuzu?</label>
+        <label>Folder to save AppImage</label>
         <button type="file" id="folder">Choose Folder</button>
         <br>
         <br>
         <label id="lol">Current Folder: </label> <button type="file" id="default">Reset to Default</button>
+        <br>
+        <br>
+        <label>Auto-Install prod.keys</label> <input type="checkbox" id="keys" name="keys">
 
         <button id="save" class="center">Save</button>
     </div>

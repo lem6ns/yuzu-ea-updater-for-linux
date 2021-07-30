@@ -76,7 +76,7 @@ button:not(#default):not(#exit):not(#folder) {
     cursor: pointer;
     text-align: center;
     position: absolute;
-    top: 369px;
+    top: 390px;
     right: -317px;
     width: 20%;
     height: 20%;
@@ -90,7 +90,7 @@ button:not(#default):not(#exit):not(#folder) {
 }
 
 #save {
-    top: 248px;
+    top: 279px;
     position: absolute;
 }
 

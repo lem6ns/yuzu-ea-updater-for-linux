@@ -7,6 +7,9 @@ api.receive("settings", settings => {
     settings = JSON.parse(settings)
     url = settings.url;
     save = settings.save;
+    if (settings.keys) {
+        document.querySelector("#keys").checked = true
+    }
     if (settings.save == "default") {
         api.send("homeFolder")
     } else {
@@ -21,7 +24,7 @@ api.receive("settings", settings => {
         releases.forEach((release, index) => {
             let elem = document.createElement("option");
             elem.value = release.url
-            if (settings.latest && index == 0 || url == release.url) elem.setAttribute("selected", "selected")
+            if (settings.latest && index == 0 || url == release.url && !settings.latest) elem.setAttribute("selected", "selected")
             elem.innerText = release.version
             document.querySelector("#releases").appendChild(elem);
         })
@@ -55,6 +58,10 @@ function dl() {
         document.querySelector(".progress").style.display = "none";
         document.querySelector(".finish").style.display = "block";
     })
+
+    api.receive("dlMessage", message => {
+        document.querySelector("#dlMessage").innerText = message;
+    })
 }
 
 document.querySelector("#install").addEventListener("click", event => {
@@ -71,14 +78,17 @@ document.querySelector("#settings").addEventListener("click", event => {
 })
 
 document.querySelector("#save").addEventListener("click", event => {
-    let latest = false;
+    let latest = false,
+    keys = false;
     document.querySelector(".settings").style.display = "none";
     document.querySelector(".buttons").style.display = "block";
     if (document.querySelector("#releases").selectedOptions[0].innerText.startsWith("Latest (")) latest = true;
+    if (document.querySelector("#keys").checked) keys = true;
     api.send("save", JSON.stringify({
         url: document.querySelector("#releases").selectedOptions[0].value,
         save: save,
-        latest: latest
+        latest: latest,
+        keys: keys
     }));
     url = document.querySelector("#releases").selectedOptions[0].value
     event.preventDefault()
@@ -107,8 +117,7 @@ api.receive("folder", ([folder]) => {
 });
 
 api.receive("homeFolder", folder => {
-    document.querySelector("#lol").innerText = "Current Folder: " + folder + "/.apps/yuzu"
-    document.querySelector("#shortcut").innerText = folder + "/.local/share/applications/yuzu Early Access.desktop"
+    document.querySelector("#lol").innerText = "Current Folder: " + folder + "/.apps/yuzu";
 })
 
 window.onkeydown = function(evt) {

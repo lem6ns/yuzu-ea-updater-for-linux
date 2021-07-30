@@ -1,6 +1,6 @@
 {
   "name": "yuzu-ea-updater",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "lololol this is gonna be horrible!!",
   "main": "main.js",
   "scripts": {
