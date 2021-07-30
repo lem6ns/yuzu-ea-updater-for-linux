@@ -7,6 +7,9 @@ api.receive("settings", settings => {
     settings = JSON.parse(settings)
     url = settings.url;
     save = settings.save;
+    if (settings.keys) {
+        document.querySelector("#keys").checked = true
+    }
     if (settings.save == "default") {
         api.send("homeFolder")
     } else {
@@ -55,6 +58,10 @@ function dl() {
         document.querySelector(".progress").style.display = "none";
         document.querySelector(".finish").style.display = "block";
     })
+
+    api.receive("dlMessage", message => {
+        document.querySelector("#dlMessage").innerText = message;
+    })
 }
 
 document.querySelector("#install").addEventListener("click", event => {
@@ -75,10 +82,12 @@ document.querySelector("#save").addEventListener("click", event => {
     document.querySelector(".settings").style.display = "none";
     document.querySelector(".buttons").style.display = "block";
     if (document.querySelector("#releases").selectedOptions[0].innerText.startsWith("Latest (")) latest = true;
+    if (document.querySelector("#keys").checked) keys = true;
     api.send("save", JSON.stringify({
         url: document.querySelector("#releases").selectedOptions[0].value,
         save: save,
-        latest: latest
+        latest: latest,
+        keys: keys
     }));
     url = document.querySelector("#releases").selectedOptions[0].value
     event.preventDefault()

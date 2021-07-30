@@ -54,17 +54,26 @@ function createWindow() {
 
     ipcMain.on("download", (event, args) => {
         if (args.save == "default") {
-            if (!fs.existsSync(homeFolder + "/.apps/")) {
-                fs.mkdirSync(homeFolder + "/.apps/");
-                fs.mkdirSync(homeFolder + "/.apps/yuzu/");
-            }
+            if (!fs.existsSync(homeFolder + "/.apps/yuzu/"))  fs.mkdirSync(homeFolder + "/.apps/yuzu/", { recursive: true });
             args.save = homeFolder + "/.apps/yuzu/" 
+        }
+        if (settings.getSync("keys")) {
+            if (!fs.existsSync(homeFolder + "/.local/share/yuzu/keys/")) fs.mkdirSync(homeFolder + "/.local/share/yuzu/keys/", { recursive: true });
+            download(BrowserWindow.getFocusedWindow(), "https://raw.githubusercontent.com/emuworld/aio/master/prod.keys", {
+                "directory": homeFolder + "/.local/share/yuzu/keys/",
+                "filename": "prod.keys",
+                "onProgress": p => {
+                    event.reply("dlMessage", "keys")
+                    event.reply("percent", p)
+                }
+            })
         }
         if (!args.save.endsWith("/")) args.save += "/";
         download(BrowserWindow.getFocusedWindow(), args.url, {
             "directory": args.save,
             "filename": "yuzu.AppImage",
             "onProgress": p => {
+                event.reply("dlMessage", "yuzu Early Access")
                 event.reply("percent", p)
             }
         }).then(dl => {
@@ -115,21 +124,25 @@ function createWindow() {
         settings.setSync("url", args.url)
         settings.setSync("save", args.save)
         settings.setSync("latest", args.latest)
+        settings.setSync("latest", args.keys)
     })
 
     ipcMain.on("getSettings", async event => {
         let url = settings.getSync("url"),
             save = settings.getSync("save"),
-            latest = settings.getSync("latest");
-        if (!url && !save && !latest) {
+            latest = settings.getSync("latest"),
+            keys = settings.getSync("keys");
+        if (!url && !save && !latest && !keys) {
             settings.setSync("url", "")
             settings.setSync("save", "default")
             settings.setSync("latest", true)
+            settings.setSync("keys", true)
         }
         event.reply("settings", JSON.stringify({
             url: url,
             save: save,
-            latest: latest
+            latest: latest,
+            keys: keys
         }))
     })
 

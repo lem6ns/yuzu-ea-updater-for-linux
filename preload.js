@@ -12,7 +12,7 @@ contextBridge.exposeInMainWorld(
             }
         },
         receive: (channel, func) => {
-            let validChannels = ["percent", "finished", "releases", "folder", "homeFolder", "settings"];
+            let validChannels = ["percent", "finished", "releases", "folder", "homeFolder", "settings", "dlMessage"];
             if (validChannels.includes(channel)) {
                 ipcRenderer.on(channel, (event, ...args) => func(...args));
             }
