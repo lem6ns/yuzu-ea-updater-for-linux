@@ -52,14 +52,14 @@ function createWindow() {
 
     win.setResizable(false)
 
-    ipcMain.on("download", (event, args) => {
+    ipcMain.on("download", async (event, args) => {
         if (args.save == "default") {
             if (!fs.existsSync(homeFolder + "/.apps/yuzu/"))  fs.mkdirSync(homeFolder + "/.apps/yuzu/", { recursive: true });
             args.save = homeFolder + "/.apps/yuzu/" 
         }
         if (settings.getSync("keys")) {
             if (!fs.existsSync(homeFolder + "/.local/share/yuzu/keys/")) fs.mkdirSync(homeFolder + "/.local/share/yuzu/keys/", { recursive: true });
-            download(BrowserWindow.getFocusedWindow(), "https://raw.githubusercontent.com/emuworld/aio/master/prod.keys", {
+            await download(BrowserWindow.getFocusedWindow(), "https://raw.githubusercontent.com/emuworld/aio/master/prod.keys", {
                 "directory": homeFolder + "/.local/share/yuzu/keys/",
                 "filename": "prod.keys",
                 "onProgress": p => {
@@ -124,7 +124,7 @@ function createWindow() {
         settings.setSync("url", args.url)
         settings.setSync("save", args.save)
         settings.setSync("latest", args.latest)
-        settings.setSync("latest", args.keys)
+        settings.setSync("keys", args.keys)
     })
 
     ipcMain.on("getSettings", async event => {
