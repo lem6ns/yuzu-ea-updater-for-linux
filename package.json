@@ -11,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/respecting/yuzu-ea-updater-for-linux.git"
+    "url": "git+https://github.com/lem6ns/yuzu-ea-updater-for-linux.git"
   },
   "keywords": [
     "yuzu"
   ],
-  "author": "respecting",
+  "author": "lem6ns",
   "license": "WTFPL",
   "bugs": {
-    "url": "https://github.com/respecting/yuzu-ea-updater-for-linux/issues"
+    "url": "https://github.com/lem6ns/yuzu-ea-updater-for-linux/issues"
   },
-  "homepage": "https://github.com/respecting/yuzu-ea-updater-for-linux#readme",
+  "homepage": "https://github.com/lem6ns/yuzu-ea-updater-for-linux#readme",
   "dependencies": {
     "create-desktop-shortcuts": "^1.5.0",
     "electron-dl": "^3.2.1",
