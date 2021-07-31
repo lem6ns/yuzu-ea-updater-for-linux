@@ -20,6 +20,7 @@ api.receive("settings", settings => {
     api.receive("releases", releases => {
         releases = JSON.parse(releases)
         releases[0].version = `Latest (${releases[0].version})`
+        if (Number(releases[0].version.split("EA-")[1].slice(0, -1)) > Number(url.split("/")[7].slice(3))) document.querySelector("#install").innerText = "Update"
         if (!url) url = releases[0].url;
         releases.forEach((release, index) => {
             let elem = document.createElement("option");
