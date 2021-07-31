@@ -54,7 +54,7 @@ function createWindow() {
 
     ipcMain.on("download", async (event, args) => {
         if (args.save == "default") {
-            if (!fs.existsSync(homeFolder + "/.apps/yuzu/"))  fs.mkdirSync(homeFolder + "/.apps/yuzu/", { recursive: true });
+            if (!fs.existsSync(homeFolder + "/.apps/yuzu/")) fs.mkdirSync(homeFolder + "/.apps/yuzu/", { recursive: true });
             args.save = homeFolder + "/.apps/yuzu/" 
         }
         if (settings.getSync("keys")) {
@@ -127,24 +127,21 @@ function createWindow() {
         settings.setSync("save", args.save)
         settings.setSync("latest", args.latest)
         settings.setSync("keys", args.keys)
+        if (args.version) settings.setSync("version", args.version);
     })
 
     ipcMain.on("getSettings", async event => {
         let url = settings.getSync("url"),
             save = settings.getSync("save"),
             latest = settings.getSync("latest"),
-            keys = settings.getSync("keys");
-        if (!url && !save && !latest && !keys) {
-            settings.setSync("url", "")
-            settings.setSync("save", "default")
-            settings.setSync("latest", true)
-            settings.setSync("keys", true)
-        }
+            keys = settings.getSync("keys"),
+            version = settings.getSync("version");
         event.reply("settings", JSON.stringify({
             url: url,
             save: save,
             latest: latest,
-            keys: keys
+            keys: keys,
+            version: version
         }))
     })
 

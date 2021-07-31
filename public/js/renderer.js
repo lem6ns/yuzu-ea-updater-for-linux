@@ -1,14 +1,18 @@
 let url = "",
-    save = "default";
+    save = "default",
+    latest = false,
+    keys = false;
 
 // get user settings
 api.send("getSettings")
 api.receive("settings", settings => {
     settings = JSON.parse(settings)
-    url = settings.url;
-    save = settings.save;
     if (settings.keys) {
         document.querySelector("#keys").checked = true
+        keys = true;
+    }
+    if (settings.latest) {
+        latest = true;
     }
     if (settings.save == "default") {
         api.send("homeFolder")
@@ -20,8 +24,7 @@ api.receive("settings", settings => {
     api.receive("releases", releases => {
         releases = JSON.parse(releases)
         releases[0].version = `Latest (${releases[0].version})`
-        if (Number(releases[0].version.split("EA-")[1].slice(0, -1)) > Number(url.split("/")[7].slice(3))) document.querySelector("#install").innerText = "Update"
-        if (!url) url = releases[0].url;
+        if (settings.version < Number(releases[0].version.split("EA-")[1].slice(0, -1)) && settings.latest) document.querySelector("#install").innerText = "Update"
         releases.forEach((release, index) => {
             let elem = document.createElement("option");
             elem.value = release.url
@@ -29,6 +32,16 @@ api.receive("settings", settings => {
             elem.innerText = release.version
             document.querySelector("#releases").appendChild(elem);
         })
+        url = settings.url;
+        save = settings.save;
+        if (url == "" || !url) url = releases[0].url;
+        if (!save) save = "default";
+        api.send("save", JSON.stringify({
+            url: url,
+            save: save,
+            latest: latest,
+            keys: keys
+        }));
     });
 })
 
@@ -48,6 +61,14 @@ function dl() {
         url: url,
         save: save,
     });
+
+    api.send("save", JSON.stringify({
+        url: url,
+        save: save,
+        latest: latest,
+        keys: keys,
+        version: Number(url.split("EA-")[1].split("/")[0])
+    }));
 
     api.receive("percent", percent => {
         document.querySelector("#downloaded").innerText = formatBytes(percent.transferredBytes);
@@ -79,8 +100,6 @@ document.querySelector("#settings").addEventListener("click", event => {
 })
 
 document.querySelector("#save").addEventListener("click", event => {
-    let latest = false,
-    keys = false;
     document.querySelector(".settings").style.display = "none";
     document.querySelector(".buttons").style.display = "block";
     if (document.querySelector("#releases").selectedOptions[0].innerText.startsWith("Latest (")) latest = true;
