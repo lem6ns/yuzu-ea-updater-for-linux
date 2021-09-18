@@ -6,7 +6,7 @@
  Please do <strong>NOT LOOK AT THE CODE!!!</strong> It is very horrible but it works.
 
 # Download
-[Here.](https://github.com/respecting/yuzu-ea-updater-for-linux/releases/latest)
+[Here.](https://github.com/lem6ns/yuzu-ea-updater-for-linux/releases/latest)
 
 # Screenshots
 ![home](https://i.imgur.com/vr1XrjH.png)
@@ -17,7 +17,7 @@
 # Building
 
 1. open up terminal
-2. `git clone https://github.com/respecting/yuzu-ea-updater-for-linux.git`
+2. `git clone https://github.com/lem6ns/yuzu-ea-updater-for-linux.git`
 3. `cd yuzu-ea-updater-for-linux`
 4. `npm i`
 5. `npm run make`
