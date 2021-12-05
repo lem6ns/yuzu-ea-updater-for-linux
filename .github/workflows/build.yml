@@ -1,0 +1,22 @@
+name: Build AppImage & Create New Release
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: npm install, and build
+        run: |
+          npm install
+          npm run make
+      - name: Upload AppImage
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Latest Build"
+          files: out/make/AppImage/x64/*.AppImage
