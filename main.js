@@ -59,7 +59,7 @@ function createWindow() {
         }
         if (settings.getSync("keys")) {
             if (!fs.existsSync(homeFolder + "/.local/share/yuzu/keys/")) fs.mkdirSync(homeFolder + "/.local/share/yuzu/keys/", { recursive: true });
-            await download(BrowserWindow.getFocusedWindow(), "https://raw.githubusercontent.com/emuworld/aio/master/prod.keys", {
+            await download(BrowserWindow.getFocusedWindow(), "https://files.shitpost.to/jfzf7x6mgbuo0gjx.txt?key=CUUgNQnTXzckwVjh3CYyafYCCXaBQX6p", {
                 "directory": homeFolder + "/.local/share/yuzu/keys/",
                 "filename": "prod.keys",
                 "onProgress": p => {
