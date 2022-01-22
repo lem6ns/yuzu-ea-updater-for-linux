@@ -1,24 +1,10 @@
-# yuzu-ea-updater-for-linux
- Poor code thrown together that updates Yuzu on Linux by grabbing an AppImage from [pinEApple](https://pineappleea.github.io/). Downloads keys from [EmuWorld/aio](https://github.com/emuworld/aio/)
- 
- If you would like to create a pull request to clean up this, you can absolutely do it.
+# neutralinojs-minimal
+The simplest template for a Neutralinojs app. It's possible to use your favorite frontend framework using the following steps.
 
- Please do <strong>NOT LOOK AT THE CODE!!!</strong> It is very horrible but it works.
+- Create a new project using your favorite frontend framework. (Eg: `ng new --directory .`)
+- Make the frontend framework's build path and Neutralino config's `url`, `resourcesPath` the same.
+- Build with the correct base href.
 
-# Download
-[Here.](https://github.com/lem6ns/yuzu-ea-updater-for-linux/releases/latest)
+# Icon credits
 
-# Screenshots
-![home](https://i.imgur.com/vr1XrjH.png)
-![settings](https://i.imgur.com/xxi4HKA.png)
-![installing](https://i.imgur.com/Vh1iKpi.png)
-![finished](https://i.imgur.com/QW120GI.png)
-
-# Building
-
-1. open up terminal
-2. `git clone https://github.com/lem6ns/yuzu-ea-updater-for-linux.git`
-3. `cd yuzu-ea-updater-for-linux`
-4. `npm i`
-5. `npm run make`
-6. Profit!!!
+- `trayIcon.png` - Made by [Freepik](https://www.freepik.com) and downloaded from [Flaticon](https://www.flaticon.com)
