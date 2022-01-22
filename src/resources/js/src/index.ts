@@ -49,7 +49,7 @@ async function download(type: string, settings: Settings): Promise<void> {
             const res = new Response(new ReadableStream({
                 async start(controller) {
                     const reader = response.body.getReader();
-                    for (; ;) {
+                    for (;;) {
                         const { done, value } = await reader.read();
                         if (done)
                             break;
