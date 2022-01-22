@@ -7,53 +7,18 @@
   "url": "/",
   "enableServer": true,
   "enableNativeAPI": true,
-  "logging": {
-    "enabled": true,
-    "writeToLogFile": true
-  },
-  "nativeBlockList": [],
-  "globalVariables": {
-    "TEST1": "Hello",
-    "TEST2": [
-      2,
-      4,
-      5
-    ],
-    "TEST3": {
-      "value1": 10,
-      "value2": {}
-    }
-  },
   "modes": {
     "window": {
       "title": "yuzu-ea-updater-for-linux",
-      "width": 800,
-      "height": 500,
-      "minWidth": 400,
-      "minHeight": 200,
+      "width": 1280,
+      "height": 720,
       "fullScreen": false,
       "alwaysOnTop": false,
       "icon": "/resources/icons/appIcon.png",
       "enableInspector": true,
       "borderless": false,
       "maximize": false,
-      "hidden": false,
-      "resizable": true,
-      "exitProcessOnClose": false
-    },
-    "browser": {
-      "globalVariables": {
-        "TEST": "Test value browser"
-      },
-      "nativeBlockList": [
-        "filesystem.*"
-      ]
-    },
-    "cloud": {
-      "url": "/resources/#cloud",
-      "nativeAllowList": [
-        "app.*"
-      ]
+      "hidden": false
     }
   },
   "cli": {

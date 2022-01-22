@@ -1,10 +1,5 @@
-# neutralinojs-minimal
-The simplest template for a Neutralinojs app. It's possible to use your favorite frontend framework using the following steps.
+# yuzu-ea-updater-for-linux
+ Poor code thrown together that updates Yuzu on Linux by grabbing an AppImage from [pinEApple](https://pineappleea.github.io/). Downloads keys from [EmuWorld/aio](https://github.com/emuworld/aio/)
 
-- Create a new project using your favorite frontend framework. (Eg: `ng new --directory .`)
-- Make the frontend framework's build path and Neutralino config's `url`, `resourcesPath` the same.
-- Build with the correct base href.
-
-# Icon credits
-
-- `trayIcon.png` - Made by [Freepik](https://www.freepik.com) and downloaded from [Flaticon](https://www.flaticon.com)
+# Download
+[Here.](https://github.com/lem6ns/yuzu-ea-updater-for-linux/releases/latest)

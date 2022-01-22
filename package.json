@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "@types/node": "^17.0.10"
+  },
+  "name": "yuzu-ea-updater-for-linux",
+  "description": "Poor code thrown together that updates Yuzu on Linux by grabbing an AppImage from [pinEApple](https://pineappleea.github.io/). Downloads keys from [EmuWorld/aio](https://github.com/emuworld/aio/)",
+  "version": "2.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lem6ns/yuzu-ea-updater-for-linux.git"
+  },
+  "author": "lem6ns",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/lem6ns/yuzu-ea-updater-for-linux/issues"
+  },
+  "homepage": "https://github.com/lem6ns/yuzu-ea-updater-for-linux#readme"
+}
