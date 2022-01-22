@@ -11,7 +11,6 @@ interface Release {
 };
 
 declare let Neutralino: any;
-const progressBar: HTMLDivElement = document.querySelector("#progress");
 
 const getReleases = async () => {
     const releases = [];
@@ -33,18 +32,14 @@ const getReleases = async () => {
 }
 
 const download = async (type: string, settings: Settings) => {
+    const progressBar: HTMLDivElement = document.querySelector("#progress");
     switch (type) {
         case "AppImage":
             const releases = await getReleases();
-            let release: Release = releases.find(release => release.ref == `refs/tags/${settings.version}`);
+            let release: Release = releases.find(release => release.version == settings.version);
             if (settings.version == "latest") release = releases[0];
 
-            if (settings.customPath && settings.path) {
-
-            };
-
             const response = await fetch(`https://fuckcors.app/${release.url}`) // have to use cors proxy until neutralino can bypass cors
-
             // https://stackoverflow.com/a/64123890
             const contentLength = response.headers.get('content-length');
             const total = parseInt(contentLength, 10);
@@ -68,6 +63,12 @@ const download = async (type: string, settings: Settings) => {
             await Neutralino.filesystem.writeBinaryFile(`${settings.path}/yuzu.AppImage`, blob.arrayBuffer());
             break;
         case "keys":
+            const response1 = await fetch("https://z.zz.fo/M6j0N.keys");
+            progressBar.style.width = `${Math.round(loaded / total * 100)}%`
+            const keys = response1.text();
+            
+            await Neutralino.filesystem.writeFile(`${await Neutralino.os.getEnv('HOME')}/.local/share/yuzu/keys/prod.keys`, keys);
             break;
     }
+    return;
 }

@@ -6,10 +6,12 @@ src/bin
 src/dist
 
 # Neutralinojs client (minified)
-src/neutralino.js
+src/resources/js/neutralino.js
 
 # Neutralinojs related files
 src/.storage
 src/*.log
 
 /node_modules
+
+src/.tmp
