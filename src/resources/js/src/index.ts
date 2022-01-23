@@ -1,8 +1,8 @@
 interface Settings {
-    customPath?: boolean,
+    customPath: boolean,
     path: string,
-    keys: boolean,
-    version: string
+    version: string,
+    keys: boolean
 }
 
 interface Release {
@@ -49,7 +49,7 @@ async function download(type: string, settings: Settings): Promise<void> {
             const res = new Response(new ReadableStream({
                 async start(controller) {
                     const reader = response.body.getReader();
-                    for (; ;) {
+                    for (;;) {
                         const { done, value } = await reader.read();
                         if (done)
                             break;
@@ -76,7 +76,7 @@ async function download(type: string, settings: Settings): Promise<void> {
 }
 
 const settings = {
-    get: async (): Promise<Settings> => {
+    async get(): Promise<Settings> {
         let settings: Settings = {
             "customPath": false,
             "path": `${await Neutralino.os.getEnv("HOME")}/.apps/yuzu/`,
@@ -92,7 +92,7 @@ const settings = {
         settings = JSON.parse(await Neutralino.storage.getData("settings"));
         return settings;
     },
-    set: async (newSettings: Settings): Promise<Settings[]> => {
+    async set(newSettings: Settings): Promise<Settings[]> {
         const oldSettings = JSON.parse(await Neutralino.storage.getData("settings"));
         await Neutralino.storage.setData("settings", JSON.stringify(newSettings));
 
